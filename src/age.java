@@ -85,7 +85,9 @@ public class  age {
                     ResultSet rs;
                     rs=ps.executeQuery("select * from clientes.persona where Id_Clie="+txtID.getText()+";");
                     while (rs.next()){
-                        txtNombre.setText(rs.getString("NOMBRE"));
+                        txtNombre.setText(rs.getString("Nom_Clie"));
+                        txtCel.setText(rs.getString("Cel_Clie"));
+                        txtEmail.setText(rs.getString("Email_Clie"));
                     }
                 }catch (Exception s){
 
