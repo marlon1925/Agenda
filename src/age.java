@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 public class age {
     private JTextField textField1;
@@ -20,6 +22,23 @@ public class age {
         frame.setSize(300,300);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    public static Connection getConetion(){
+        Connection con = null;
+        String base = "estudiante";
+        String url = "jdbc:mysql://localhost:3306/" + base;
+        String user = "root";
+        String password = "marlon";
+
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection(url,user,password);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return con;
     }
 }
 
