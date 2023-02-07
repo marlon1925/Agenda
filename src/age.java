@@ -1,18 +1,35 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class age {
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
+public class  age {
+    private JTextField txtID;
+    private JTextField txtNombre;
+    private JTextField txtCel;
+    private JTextField txtEmail;
     private JButton actualizarButton;
     private JButton buscarButton;
     private JPanel panel1;
 
-    public age(){
 
+    public age(){
+        actualizarButton.setEnabled(false);
+        txtNombre.setEnabled(false);
+        txtCel.setEnabled(false);
+        txtEmail.setEnabled(false);
+
+
+        buscarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actualizarButton.setEnabled(true);
+                txtNombre.setEnabled(true);
+                txtCel.setEnabled(true);
+                txtEmail.setEnabled(true);
+            }
+        });
     }
     public static void main (String[]args){
         JFrame frame = new JFrame("Calculadora");
@@ -29,7 +46,7 @@ public class age {
         String base = "estudiante";
         String url = "jdbc:mysql://localhost:3306/" + base;
         String user = "root";
-        String password = "marlon";
+        String password = "Wilson";
 
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
