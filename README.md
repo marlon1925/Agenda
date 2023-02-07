@@ -9,7 +9,7 @@ CREATE TABLE PERSONA(
 Id_Clie numeric(10) not null,
 Nom_Clie varchar(20)not null,
 Cel_Clie numeric(10)not null,
-Email_Clie varchar(10)not null
+Email_Clie varchar(25)not null
 )
 
 SELECT * FROM PERSONA
