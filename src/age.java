@@ -6,6 +6,9 @@ import javax.swing.text.DocumentFilter;
 import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.*;
 
 public class  age {
     private JTextField txtID;
@@ -15,6 +18,8 @@ public class  age {
     private JButton actualizarButton;
     private JButton buscarButton;
     private JPanel panel1;
+
+    Statement ps;
 
 
     public age(){
@@ -71,13 +76,43 @@ public class  age {
                 txtNombre.setEnabled(true);
                 txtCel.setEnabled(true);
                 txtEmail.setEnabled(true);
+
+                Connection con;
+
+                try{
+                    con = getConection();
+                    ps = con.createStatement();
+                    ResultSet rs;
+                    rs=ps.executeQuery("select * from clientes.persona where Id_Clie="+txtID.getText()+";");
+                    while (rs.next()){
+                        txtNombre.setText(rs.getString("NOMBRE"));
+                    }
+                }catch (Exception s){
+
+                }
             }
         });
     }
 
 
+    public static Connection getConection(){
+        Connection con = null;
+        String base= "clientes";
+        String url = "jdbc:mysql://localhost:3306/" + base;
+        String user = "root";
+        String password = "123456";
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection(url,user,password);
+        }catch (ClassNotFoundException | SQLException e){
+            System.err.println(e);
+        }
+        return con;
+    }
+
+
     public static void main (String[]args){
-        JFrame frame = new JFrame("Calculadora");
+        JFrame frame = new JFrame("Base Datos");
         frame.setContentPane(new age().panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
@@ -86,21 +121,6 @@ public class  age {
         frame.setVisible(true);
     }
 
-    public static Connection getConetion(){
-        Connection con = null;
-        String base = "cliente";
-        String url = "jdbc:mysql://localhost:3306/" + base;
-        String user = "root";
-        String password = "Wilson";
 
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection(url,user,password);
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return con;
-    }
 }
 
