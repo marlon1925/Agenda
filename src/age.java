@@ -20,6 +20,7 @@ public class  age {
     private JPanel panel1;
 
     Statement ps;
+    PreparedStatement st;
 
 
     public age(){
@@ -91,6 +92,36 @@ public class  age {
                     }
                 }catch (Exception s){
 
+                }
+            }
+        });
+
+        actualizarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Connection con;
+                try {
+                    con = getConection();
+                    st = con.prepareStatement("UPDATE `clientes`.`persona` SET " +
+                            "`Id_Clie` = ?" +
+                            ", `Nom_Clie` = ?" +
+                            ", `Cel_Clie` = ?" +
+                            ", `Email_Clie` = ?" +
+                            " WHERE (`Id_Clie` =" + txtID.getText() + ");");
+                    st.setString(1, txtNombre.getText());
+                    st.setString(2, txtCel.getText());
+                    st.setString(3, txtEmail.getText());
+                    System.out.println(st);
+                    int res = st.executeUpdate();
+
+                    if (res > 0)
+                        JOptionPane.showMessageDialog(null, "Se Guardo correctamente!!", "Bien hecho", JOptionPane.INFORMATION_MESSAGE);
+                    else
+                        JOptionPane.showMessageDialog(null, "ERROR!!!", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+                    con.close();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
                 }
             }
         });
