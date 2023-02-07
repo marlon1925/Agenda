@@ -1,6 +1,9 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
+import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -20,6 +23,46 @@ public class  age {
         txtCel.setEnabled(false);
         txtEmail.setEnabled(false);
 
+        // Restringir entrada en txtName a solo letras
+        ((AbstractDocument) txtID.getDocument()).setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                if (string.matches("[0-9]+")) {
+                    super.insertString(fb, offset, string, attr);
+                                    }
+            }
+
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                if (text.matches("[0-9]+")) {
+                    super.replace(fb, offset, length, text, attrs);
+                }
+            }
+        });
+
+
+        //Controla el ingrso para que no imgrese mas de 10 numeros
+        txtID.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if(txtID.getText().length()>=10){
+                    e.consume();
+                }
+            }
+        });
+
+        //Controla el ingrso para que no imgrese mas de 10 numeros
+        txtCel.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if(txtCel.getText().length()>=10){
+                    e.consume();
+                }
+            }
+        });
+
+
+
 
         buscarButton.addActionListener(new ActionListener() {
             @Override
@@ -31,6 +74,8 @@ public class  age {
             }
         });
     }
+
+
     public static void main (String[]args){
         JFrame frame = new JFrame("Calculadora");
         frame.setContentPane(new age().panel1);
