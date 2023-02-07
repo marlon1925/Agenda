@@ -43,7 +43,7 @@ public class  age {
 
     public static Connection getConetion(){
         Connection con = null;
-        String base = "estudiante";
+        String base = "cliente";
         String url = "jdbc:mysql://localhost:3306/" + base;
         String user = "root";
         String password = "Wilson";
