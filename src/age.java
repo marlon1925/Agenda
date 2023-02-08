@@ -3,12 +3,14 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
+import java.awt.*;
 import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import javax.xml.transform.Result;
 
 public class  age {
     private JTextField txtID;
@@ -97,32 +99,32 @@ public class  age {
         });
 
         actualizarButton.addActionListener(new ActionListener() {
+            Connection con2;
             @Override
             public void actionPerformed(ActionEvent e) {
-                Connection con;
-                try {
-                    con = getConection();
-                    st = con.prepareStatement("UPDATE `clientes`.`persona` SET " +
-                            "`Id_Clie` = ?" +
-                            ", `Nom_Clie` = ?" +
-                            ", `Cel_Clie` = ?" +
-                            ", `Email_Clie` = ?" +
-                            " WHERE (`Id_Clie` =" + txtID.getText() + ");");
-                    st.setString(1, txtNombre.getText());
-                    st.setString(2, txtCel.getText());
-                    st.setString(3, txtEmail.getText());
-                    System.out.println(st);
+                try{
+                    con2 = getConection();
+                    st = con2.prepareStatement("UPDATE clientes.persona SET Nom_Clie = ?, Cel_Clie = ?, Email_Clie = ? WHERE Id_Clie ="+txtID.getText() );
+
+                    st.setString(1,txtNombre.getText());
+                    st.setString(2,txtCel.getText());
+                    st.setString(3,txtEmail.getText());
+
+                    System.out.println(ps);
                     int res = st.executeUpdate();
 
-                    if (res > 0)
-                        JOptionPane.showMessageDialog(null, "Se Guardo correctamente!!", "Bien hecho", JOptionPane.INFORMATION_MESSAGE);
-                    else
-                        JOptionPane.showMessageDialog(null, "ERROR!!!", "ERROR", JOptionPane.ERROR_MESSAGE);
-
-                    con.close();
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
+                    if(res > 0 ){
+                        JOptionPane.showMessageDialog(null,"La actualización se realizado con EXITO!");
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Error, datos invalidos!! ERROR !!");
+                    }
+                    con2.close();
+                }catch (HeadlessException | SQLException f){
+                    System.out.println(f);
                 }
+
+
+
             }
         });
     }
