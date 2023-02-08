@@ -1,23 +1,33 @@
-# Agenda
-creador
+#Programa de Agenda
+------
+#Integrantes:
+- Wilson Guayanay
+- Marlon Lalangui
+- Josue Salazar
+----
 
-CREATE DATABASE CLIENTE
+Capturas de la base de datos sin ALTERAR:
 
-USE CLIENTE
+![image](https://user-images.githubusercontent.com/117754219/217395850-10f49f64-5b8c-450a-82d9-c4334107c423.png)
 
-CREATE TABLE PERSONA(
-Id_Clie numeric(10) not null,
-Nom_Clie varchar(20)not null,
-Cel_Clie numeric(10)not null,
-Email_Clie varchar(25)not null
-)
+----
+Captura del programa cuando se incia:
 
-SELECT * FROM PERSONA
+![image](https://user-images.githubusercontent.com/117754219/217395956-8701b4b5-0673-4271-9bc3-00deb6674099.png)
 
-Insert Into PERSONA VALUES(1718688284,'Wilson', 0993925118,'wilo@e.com')
+----
+Captura de cuando busca un usuario registrado:
 
-Insert Into PERSONA VALUES(1726025040,'Marlon', 0987654321,'mar@e.com')
+![image](https://user-images.githubusercontent.com/117754219/217396056-c7832bfc-fd6e-40f5-9453-f21694e8e7dd.png)
 
-Insert Into PERSONA VALUES(1758957185,'Josue', 0987259301,'jos@e.com')
+----
+Captura al momento de actualizar datos:
 
-Insert Into PERSONA VALUES(1771860975,'Melani', 0985064015,'mel@e.com')
+![image](https://user-images.githubusercontent.com/117754219/217396203-47c7e9bb-e5a0-4d68-914f-321da7d8932f.png)
+
+-----
+Base de Datos actualizada:
+
+![image](https://user-images.githubusercontent.com/117754219/217396284-776b96da-5e81-4124-bc81-e9078029d115.png)
+
+
